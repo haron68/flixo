@@ -146,25 +146,6 @@ const SettingsScreen = ({ navigation }: Props) => {
         <Text style={{ color: Theme.COLORS.WHITE }}>{toast.message}</Text>
       </Toast>
       <ScrollView contentContainerStyle={baseStyles.container}>
-        {/*<Block style={{ marginBottom: Theme.SIZES.BASE }}>*/}
-        {/*  <Text style={baseStyles.thinTitleL}>Security</Text>*/}
-        {/*  <ListItem*/}
-        {/*    colorScheme={colorScheme}*/}
-        {/*    item={{*/}
-        {/*      icon: <Lock color={iconBackgroundColor} size={Theme.SIZES.BASE * 1.5} variant='Bulk'/>,*/}
-        {/*      name: 'Change Pin',*/}
-        {/*    }}*/}
-        {/*    onPress={() => null}*/}
-        {/*  />*/}
-        {/*  <ListItemOption*/}
-        {/*    colorScheme={colorScheme}*/}
-        {/*    item={{*/}
-        {/*      icon: <FingerScan color={iconBackgroundColor} size={Theme.SIZES.BASE * 1.5} variant='Bulk'/>,*/}
-        {/*      name: 'Enable Biometric Lock',*/}
-        {/*    }}*/}
-        {/*    onPress={() => null}*/}
-        {/*  />*/}
-        {/*</Block>*/}
         <Block style={{ marginBottom: Theme.SIZES.BASE }}>
           <Text style={baseStyles.thinTitleL}>Appearance</Text>
           <ListItem
