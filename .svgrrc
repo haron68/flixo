@@ -1,0 +1,15 @@
+{
+	"replaceAttrValues": {
+	  "#005881": "{props.fillPrimary}",
+	  "#0092D6": "{props.fillPrimary}",
+	  "#128023": "{props.fillPrimary}",
+	  "#1592D1": "{props.fillPrimary}",
+	  "#5CADD2": "{props.fillPrimary}",
+	  "#f2862d": "{props.fillPrimary}",
+	  "#2F80ED": "{props.fillPrimary}",
+	  "#F5B21A": "{props.fillPrimary}",
+	  "#0079B1": "{props.fillPrimary}",
+	  "#000000": "{props.fillPrimary}",
+	  "white": "{props.fillSecondary}"
+	}
+}

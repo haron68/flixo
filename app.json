@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "Flixo",
+    "slug": "flixo",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "plugins": [
+      [
+        "react-native-document-scanner-plugin",
+        {
+          "cameraPermission": "Flixo needs to use your camera to take a picture of your ID to store virtually on your device."
+        }
+      ]
+    ],
+    "ios": {
+      "buildNumber": "1",
+      "supportsTablet": false,
+      "usesAppleSignIn": false,
+      "appStoreUrl": "https://apps.apple.com/us/app/itunes-u/",
+      "bundleIdentifier": "com.harrya.flixo"
+    },
+    "android": {
+      "versionCode": 1,
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.flixo.Flixo",
+      "package": "com.harrya.flixo"
+    }
+  }
+}
