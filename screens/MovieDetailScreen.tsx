@@ -131,7 +131,7 @@ const MovieDetailScreen = ({ navigation, route }: Props) => {
             {movie?.production_companies && (
               <Block>
                 <Text style={styles.sectionTitle}>Producers</Text>
-                <Block row space="around" style={{ flexWrap: true, alignItems: 'center' }}>
+                <Block row space="around" style={{ flexWrap: 'wrap', alignItems: 'center' }}>
                   {movie?.production_companies?.map(({ logo_path, name }: any) => {
                     if (!logo_path) {
                       return (<Text>{name}</Text>)
@@ -158,7 +158,6 @@ const MovieDetailScreen = ({ navigation, route }: Props) => {
         </Block>
       )}
     </View>
-
   )
 }
 
