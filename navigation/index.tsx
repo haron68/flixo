@@ -12,6 +12,7 @@ import {
 } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import IntroModalScreen from '@screens/IntroModalScreen'
+import MovieDetailScreen from '@screens/MovieDetailScreen'
 
 const headerLargeTitleOptions = (colorScheme: ColorSchemeName) => ({
   headerLargeTitle: true,
@@ -78,6 +79,21 @@ const RootNavigator = () => {
             fontFamily: 'Poppins-Bold',
             color: Theme.COLORS.GOLD,
           },
+        }}
+      />
+      <RootStack.Screen
+        name='MovieDetail'
+        component={MovieDetailScreen}
+        options={{
+          title: '',
+          headerTitle: '',
+          ...headerLargeTitleOptions(colorScheme),
+          headerLeft: () => (
+            <BackButton
+              colorScheme={colorScheme}
+              onPress={() => navigation.dispatch(StackActions.pop())}
+            />
+          ),
         }}
       />
       <RootStack.Screen

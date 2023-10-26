@@ -27,6 +27,7 @@
     "expo-splash-screen": "~0.17.5",
     "expo-status-bar": "~1.4.2",
     "expo-store-review": "~6.0.0",
+    "expo-web-browser": "~12.0.0",
     "galio-framework": "^0.8.0",
     "iconsax-react-native": "^0.0.8",
     "intl": "^1.2.5",

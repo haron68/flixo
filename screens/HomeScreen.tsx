@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {
   ActivityIndicator,
   Platform, RefreshControl,
-  StyleSheet,
+  StyleSheet, TouchableOpacity,
 } from 'react-native'
 import { NavBarButton } from '@components/Buttons'
 import { Text } from '@components/Texts'
@@ -18,11 +18,13 @@ import { Setting2 } from 'iconsax-react-native'
 import { useSelector } from 'react-redux'
 import { RootState } from '@store/store'
 import { getMoviesList } from '../services/RestService'
-import { Card, Toast } from 'galio-framework'
+import { Card, Toast, Icon, Block } from 'galio-framework'
 import Colors from '@constants/Colors'
 import dayjs from 'dayjs'
 import { useHeaderHeight } from '@react-navigation/elements'
 import { ToastModel } from '@models/ToastModel'
+import { NumberFormatter } from '../utils/transformers'
+import PopularityBadge from '@components/Views/PopularityBadge'
 
 type Props = {
   navigation: NavigationProp<any>
@@ -55,7 +57,6 @@ const HomeScreen = ({ navigation }: Props) => {
   const handleOnRefresh = () => setRefresh(true)
 
   const handleOnEndReached = (info: { distanceFromEnd: number }) => {
-    console.log(info)
     setLoadingMovies(true)
     const nextPage = page + 1
     getMoviesList(nextPage)
@@ -72,6 +73,12 @@ const HomeScreen = ({ navigation }: Props) => {
           setLoadingMovies(false)
         }, 2000)
       })
+  }
+
+  const handleOnCardPress = (data: any) => {
+    navigation.dispatch(
+      StackActions.push('MovieDetail', { data })
+    )
   }
 
   useEffect(() => {
@@ -155,18 +162,21 @@ const HomeScreen = ({ navigation }: Props) => {
         }
         renderItem={({ item: data }) => {
           return (
-            <Card
-              flex
-              borderless
-              style={baseStyles.card}
-              title={data.title}
-              titleColor={Colors[colorScheme].text}
-              caption={`Release ${dayjs(data.release_date).format('M/D/YY')}`}
-              location="Los Angeles, CA"
-              avatar={`https://image.tmdb.org/t/p/w500/${data.backdrop_path}`}
-              imageBlockStyle={baseStyles.imageBlockStyle}
-              image={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
-            />
+            <TouchableOpacity onPress={() => handleOnCardPress(data)}>
+              {/*@ts-ignore*/}
+              <Card
+                flex
+                borderless
+                style={baseStyles.card}
+                title={data.title}
+                titleColor={Colors[colorScheme].text}
+                caption={`Release ${dayjs(data.release_date).format('M/D/YY')}`}
+                avatar={`https://image.tmdb.org/t/p/w500/${data.backdrop_path}`}
+                imageBlockStyle={baseStyles.imageBlockStyle}
+                image={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
+                location={<PopularityBadge popularity={data.popularity} />}
+              />
+            </TouchableOpacity>
           )
         }}
       />

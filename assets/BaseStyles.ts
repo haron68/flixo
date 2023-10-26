@@ -220,8 +220,6 @@ export const baseStyles = StyleSheet.create({
     height: 90,
     position: 'absolute',
     overflow: 'hidden',
-    borderBottomRightRadius: Theme.SIZES.BASE,
-    borderBottomLeftRadius: Theme.SIZES.BASE,
   },
   map: {
     flex: 1,
@@ -277,7 +275,6 @@ export const baseStyles = StyleSheet.create({
     width: Theme.SIZES.CARD_WIDTH,
     marginVertical: Theme.SIZES.CARD_MARGIN_VERTICAL
   },
-  imageBlockStyle: {}
 })
 
 export const bottomSheetStyleProps = (colorScheme: ColorSchemeName) => ({
