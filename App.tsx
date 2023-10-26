@@ -24,11 +24,7 @@ export default function App() {
   })
 
   useEffect(() => {
-    async function changeScreenOrientation() {
-      await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.ALL)
-    }
-
-    changeScreenOrientation()
+    ScreenOrientation.unlockAsync()
   }, [])
 
   if (!isLoadingComplete) {

@@ -6,6 +6,7 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "orientation": "default",
     "ios": {
       "buildNumber": "1",
       "supportsTablet": false,
