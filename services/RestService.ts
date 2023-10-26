@@ -55,3 +55,7 @@ export const getMoviesList = async (page: number = 1) => {
 export const getMovieDetails = async (id: number) => {
   return axios.get(`${TMDB_API_URL}/3/movie/${id}`, baseConfig)
 }
+
+export const getMovieGenres = async () => {
+  return axios.get(`${TMDB_API_URL}/3/genre/movie/list?language=en`, baseConfig)
+}

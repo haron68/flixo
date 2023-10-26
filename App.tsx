@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Provider as ReduxProvider } from 'react-redux'
 import Navigation from '@navigation/index'
@@ -12,9 +12,24 @@ import { configureStore } from '@reduxjs/toolkit'
 import { StatusBar } from 'expo-status-bar'
 import { GalioProvider } from 'galio-framework'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import * as ScreenOrientation from 'expo-screen-orientation'
 
 export default function App() {
   const [isLoadingComplete, settings] = useCachedResources()
+  const store = configureStore({
+    reducer,
+    preloadedState: {
+      settings
+    } as any
+  })
+
+  useEffect(() => {
+    async function changeScreenOrientation() {
+      await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.ALL)
+    }
+
+    changeScreenOrientation()
+  }, [])
 
   if (!isLoadingComplete) {
     return null
@@ -22,12 +37,7 @@ export default function App() {
     return (
       <GestureHandlerRootView style={{flex: 1}}>
         <ReduxProvider
-          store={configureStore({
-            reducer,
-            preloadedState: {
-              settings
-            } as any
-          })}>
+          store={store}>
           <ActionSheetProvider>
             <GalioProvider theme={Theme}>
               <BottomSheetModalProvider>

@@ -17,18 +17,19 @@ import {
 import { Setting2 } from 'iconsax-react-native'
 import { useSelector } from 'react-redux'
 import { RootState } from '@store/store'
-import { getMoviesList } from '../services/RestService'
-import { Card, Toast, Icon, Block } from 'galio-framework'
+import { getMovieGenres, getMoviesList } from '../services/RestService'
+import { Card, Toast, Block } from 'galio-framework'
 import Colors from '@constants/Colors'
 import dayjs from 'dayjs'
 import { useHeaderHeight } from '@react-navigation/elements'
 import { ToastModel } from '@models/ToastModel'
-import { NumberFormatter } from '../utils/transformers'
 import PopularityBadge from '@components/Views/PopularityBadge'
 
 type Props = {
   navigation: NavigationProp<any>
 }
+
+type MovieGenresMap = { [id: string]: string }
 
 const HomeScreen = ({ navigation }: Props) => {
   const colorScheme = useColorScheme()
@@ -39,8 +40,9 @@ const HomeScreen = ({ navigation }: Props) => {
   const [isLoadingMovies, setLoadingMovies] = useState(false)
   const [movies, setMovies] = useState<any[]>([])
   const [page, setPage] = useState<number>(1)
+  const [movieGenresMap, setMovieGenresMap] = useState<MovieGenresMap>()
 
-  const hasSeenIntro: boolean | undefined = useSelector((state: RootState) => state.settings.hasSeenIntro)
+  const hasSeenIntro = useSelector((state: RootState) => state.settings.hasSeenIntro)
 
   const showToastError = () => {
     setToast({
@@ -102,6 +104,16 @@ const HomeScreen = ({ navigation }: Props) => {
         />
       ),
     })
+
+    getMovieGenres()
+      .then((res) => {
+        const { genres } = res.data
+        const genresMap: MovieGenresMap = {}
+        genres?.forEach(({id, name}: { id: number, name: string }) => {
+          genresMap[id] = name
+        })
+        setMovieGenresMap(genresMap)
+      })
   }, [])
 
   useEffect(() => {
@@ -119,6 +131,19 @@ const HomeScreen = ({ navigation }: Props) => {
         setRefresh(false)
       })
   }, [isRefresh])
+
+
+  const styles = StyleSheet.create<any>({
+    infoContainer: {
+      paddingHorizontal: Theme.SIZES.BASE,
+      paddingBottom: Theme.SIZES.BASE
+    },
+    card: {
+      ...baseStyles.card,
+      backgroundColor: Colors[colorScheme].background,
+      width: '100%'
+    }
+  })
 
   const renderFooter = () => {
     if (!isLoadingMovies) return null
@@ -167,15 +192,23 @@ const HomeScreen = ({ navigation }: Props) => {
               <Card
                 flex
                 borderless
-                style={baseStyles.card}
+                style={styles.card}
                 title={data.title}
                 titleColor={Colors[colorScheme].text}
                 caption={`Release ${dayjs(data.release_date).format('M/D/YY')}`}
                 avatar={`https://image.tmdb.org/t/p/w500/${data.backdrop_path}`}
                 imageBlockStyle={baseStyles.imageBlockStyle}
                 image={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
-                location={<PopularityBadge popularity={data.popularity} />}
-              />
+                location={
+                  <PopularityBadge popularity={data.popularity} />
+                }
+              >
+                {movieGenresMap && (
+                  <Block style={styles.infoContainer}>
+                    <Text>{data.genre_ids.map((id: number) => movieGenresMap[id]).join(', ')}</Text>
+                  </Block>
+                )}
+              </Card>
             </TouchableOpacity>
           )
         }}
@@ -183,15 +216,5 @@ const HomeScreen = ({ navigation }: Props) => {
     </View>
   )
 }
-
-const styles = StyleSheet.create<any>({
-  infoContainer: {
-    ...baseStyles.borderBottomLine,
-    paddingVertical: Theme.SIZES.BASE,
-  },
-  infoHeader: {
-    fontWeight: 'bold',
-  },
-})
 
 export default HomeScreen

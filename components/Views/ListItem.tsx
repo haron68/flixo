@@ -38,7 +38,7 @@ export function ListItem(props: ListItemProps) {
       paddingVertical: Theme.SIZES.BASE,
       borderBottomWidth: StyleSheet.hairlineWidth,
       borderBottomColor: Theme.COLORS.MUTED,
-      width: MAX_WIDTH,
+      width: '100%',
     },
     ...style,
   })

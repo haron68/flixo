@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import { Text } from '@components/Texts'
 import { View } from '@components/Views'
-import Colors, { AppColorScheme } from '@constants/Colors'
+import { AppColorScheme } from '@constants/Colors'
 import { baseStyles, MAX_WIDTH } from '@assets/BaseStyles'
 import Theme from '@assets/Theme'
 import { Feather } from '@expo/vector-icons'
@@ -88,7 +88,7 @@ export function ListItemOption(props: Props) {
       paddingVertical: Theme.SIZES.BASE,
       borderBottomWidth: StyleSheet.hairlineWidth,
       borderBottomColor: Theme.COLORS.MUTED,
-      width: MAX_WIDTH,
+      width: '100%',
     },
     ...style,
   })

@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState: SettingsModel = {
   systemAppearance: 'dark',
-  hasSeenIntro: undefined,
+  hasSeenIntro: undefined
 }
 
 export const settingsSlice = createSlice({
