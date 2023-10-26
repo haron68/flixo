@@ -47,7 +47,6 @@ const baseConfig = {
     Authorization: `Bearer ${TMDB_API_TOKEN}`
   }
 }
-export const getMoviesList = async () => {
-  console.log('env -> ', TMDB_API_URL, TMDB_API_TOKEN)
-  return axios.get(`${TMDB_API_URL}/3/movie/11`, baseConfig)
+export const getMoviesList = async (page: number = 1) => {
+  return axios.get(`${TMDB_API_URL}/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc`, baseConfig)
 }

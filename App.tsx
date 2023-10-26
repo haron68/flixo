@@ -22,7 +22,12 @@ export default function App() {
     return (
       <GestureHandlerRootView style={{flex: 1}}>
         <ReduxProvider
-          store={store}>
+          store={configureStore({
+            reducer,
+            preloadedState: {
+              settings
+            } as any
+          })}>
           <ActionSheetProvider>
             <GalioProvider theme={Theme}>
               <BottomSheetModalProvider>

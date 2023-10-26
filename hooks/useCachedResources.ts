@@ -2,10 +2,13 @@ import { useEffect, useState } from 'react'
 import { DatabaseService, SETTINGS_KEY } from '../services/DatabaseService'
 import { loadAsync } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
+import { RootState } from '@store/store'
 
 export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = useState(false)
-  const [settings, setSettings] = useState({})
+  const [settings, setSettings] = useState<any>({
+    systemAppearance: 'dark'
+  })
 
   // Load any resources or data that we need prior to rendering the app
   useEffect(() => {
@@ -38,7 +41,7 @@ export default function useCachedResources() {
         // load app settings to preload state
         await DatabaseService.get(SETTINGS_KEY).then((res) => {
           if (res) {
-            setSettings(JSON.parse(res))
+            setSettings(JSON.parse(res) as any)
           }
         })
       } catch (e) {

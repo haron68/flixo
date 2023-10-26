@@ -1,10 +1,10 @@
-import { Card as DefaultCard } from 'galio-framework'
+import { FlatList as DefaultFlatList } from 'react-native'
 import { ThemeProps } from '@components/Themed'
 import useThemeColor from '@hooks/useThemeColor'
 
-type CardProps = ThemeProps & DefaultCard['props']
+type FlatListProps = ThemeProps & DefaultFlatList['props']
 
-export function Card(props: CardProps) {
+export function FlatList(props: FlatListProps) {
   const { style, lightColor, darkColor, ...otherProps } = props
   const backgroundColor = useThemeColor(
     { light: lightColor, dark: darkColor },
@@ -12,7 +12,7 @@ export function Card(props: CardProps) {
   )
 
   return (
-    <DefaultCard
+    <DefaultFlatList
       contentInsetAdjustmentBehavior='automatic'
       style={[{ backgroundColor }, style]}
       {...otherProps}

@@ -272,6 +272,12 @@ export const baseStyles = StyleSheet.create({
     borderRadius: Theme.SIZES.BASE,
     overflow: 'hidden',
   },
+  card: {
+    borderWidth: 0,
+    width: Theme.SIZES.CARD_WIDTH,
+    marginVertical: Theme.SIZES.CARD_MARGIN_VERTICAL
+  },
+  imageBlockStyle: {}
 })
 
 export const bottomSheetStyleProps = (colorScheme: ColorSchemeName) => ({
